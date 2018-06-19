@@ -11,17 +11,23 @@
     </bean>
 
     <bean id="eventLogger" class="com.yet.spring.core.loggers.ConsoleEventLogger" />
+    <bean id="cacheLogger" class="com.yet.spring.core.loggers.CacheFileEventLogger" parent="fileLogger"/>
+    <bean id="fileLogger" class="com.yet.spring.core.loggers.FileEventLogger" scope="prototype" init-method="init" destroy-method="destroy">
+        <constructor-arg value="log.txt"/>
+    </bean>
+
     <bean id="event" class="com.yet.spring.core.events.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
     </bean>
-    <bean id="fileEventLogger" class="com.yet.spring.core.loggers.FileEventLogger" scope="prototype" init-method="init" destroy-method="destroy"/>
+
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
     <bean id="app" class="com.yet.spring.core.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="fileEventLogger"/>
+        <constructor-arg ref="fileLogger"/>
         <constructor-arg ref="event"/>
     </bean>
 

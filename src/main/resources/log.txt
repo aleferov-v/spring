@@ -1,0 +1,1 @@
+Event:	id=0, msg='Some message for Client: 1, ID: 1', date=19.06.2018 9:18:11

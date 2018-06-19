@@ -11,8 +11,12 @@ public class FileEventLogger implements EventLogger {
     protected String fileName;
     protected File file;
 
+    public FileEventLogger(String fileName) {
+        this.fileName = fileName;
+    }
+
     public void init() throws IOException {
-        this.file = new File(fileName);
+        this.file = new File("src/main/resources/" + fileName);
         if (!file.canWrite()) {
             throw new IOException();
         }
@@ -20,7 +24,7 @@ public class FileEventLogger implements EventLogger {
 
     public void logEvent(Event event) {
         try {
-            FileUtils.writeStringToFile(new File(fileName), event.toString(), Charset.defaultCharset(), true);
+            FileUtils.writeStringToFile(file, event.toString(), Charset.defaultCharset(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }

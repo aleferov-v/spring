@@ -8,24 +8,30 @@ public class Event {
     private String msg;
     private Date date;
     private DateFormat df;
-
-    public Event(int id, String msg, Date date) {
-        this.id = id;
-        this.msg = msg;
-        this.date = date;
-    }
+    private EventType type;
 
     public Event(Date date, DateFormat df) {
         this.date = date;
         this.df = df;
     }
 
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     @Override
     public String toString() {
-        return "Event{" +
+        return "Event:\t" +
                 "id=" + id +
                 ", msg='" + msg + '\'' +
-                ", date=" + df.format(date) +
-                '}';
+                ", date=" + df.format(date);
     }
 }
